@@ -47,7 +47,7 @@ def plot_reflection_on_circle(ax, angle, center, radius, ray_length=50, color='b
 
 
 
-def reflecting_ray_simulation(a = 20, b = 20, r = 15, ray_count = 15):
+def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
     max_dim = max(abs(a), abs(b), r) * 3
     fig, ax = plt.subplots()
     ax.set_xlim(-max_dim, max_dim)
