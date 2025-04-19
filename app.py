@@ -9,7 +9,7 @@ iface1 = gr.Interface(
                         gr.Number(label="Circle Center X (a)", value=20),
                         gr.Number(label="Circle Center Y (b)", value=20),
                         gr.Number(label="Radius (r)", value=15),
-                        gr.Slider(minimum=1, maximum=1000, step=1, label="Number of Rays", value=50)
+                        gr.Slider(minimum=2, maximum=1000, step=1, label="Number of Rays", value=50)
                     ],
                     outputs="image",
                     live=True,
