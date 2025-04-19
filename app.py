@@ -12,7 +12,7 @@ iface1 = gr.Interface(
                         gr.Slider(minimum=1, maximum=1000, step=1, label="Number of Rays", value=50)
                     ],
                     outputs="image",
-                    live=True
+                    live=True,
                     title="Channel domination", 
                     description=description1,
                  )
