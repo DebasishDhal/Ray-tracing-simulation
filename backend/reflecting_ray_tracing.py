@@ -102,7 +102,8 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
             x, y = draw_line(angle)
             ax.plot(x, y, color='red', lw=1, zorder=5)
     # plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
-    
+    ax.set_title(f'Rays with blocked/reflected rays from a perfectly reflective circle at ({a},{b}) with radius {r}')
+    plt.grid(True)
     plt.show()
     fig.canvas.draw()
     image_array = np.array(fig.canvas.renderer.buffer_rgba())
