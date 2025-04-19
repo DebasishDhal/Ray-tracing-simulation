@@ -91,7 +91,7 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
         y_1 = length * mt.sin(angle) + y_0
         return [x_0, x_1], [y_0, y_1]
     
-    increment = 2*my.pi/increment
+    increment = 2*mt.pi/increment
     for angle in np.arange(0, 2 * np.pi, increment):
         dx = mt.cos(angle)
         dy = mt.sin(angle)
