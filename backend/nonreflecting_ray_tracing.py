@@ -25,12 +25,6 @@ def is_angle_between(angle, start, end):
         return angle >= start or angle <= end
 
 
-def draw_line(angle, length=max(max_dim, 500), x_0=0, y_0=0):
-    x_1 = length * mt.cos(angle) + x_0
-    y_1 = length * mt.sin(angle) + y_0
-    return [x_0, x_1], [y_0, y_1]
-
-
 def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
     if a == 0 and b == 0:
         raise ValueError("Circle center cannot be at the origin (0, 0).")
@@ -48,6 +42,12 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
     
     circle = plt.Circle((a, b), r, color='blue', fill=False)
     ax.add_artist(circle)
+
+    def draw_line(angle, length=max(max_dim, 500), x_0=0, y_0=0):
+        x_1 = length * mt.cos(angle) + x_0
+        y_1 = length * mt.sin(angle) + y_0
+        return [x_0, x_1], [y_0, y_1]
+
     
     theta_center = mt.atan2(b, a)
     d = mt.hypot(a, b)
