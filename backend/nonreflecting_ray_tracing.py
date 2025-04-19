@@ -98,7 +98,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
     ax.plot(x1, y1, color='green', lw=2, linestyle='--')
     ax.plot(x2, y2, color='green', lw=2, linestyle='--')
     
-    ax.set_title(f'Rays with shadow from a perfectly absorbing circle at ({a},{b}) with radius {r}')
+    ax.set_title(f'Rays with shadow from a perfectly absorbing circle\nCenter - ({a},{b}), Radius {r}')
     plt.grid(True)
     plt.show()
 
