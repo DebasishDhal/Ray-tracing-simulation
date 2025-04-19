@@ -1,13 +1,12 @@
 ---
-title: All In One Translation
-emoji: 📚
-colorFrom: gray
-colorTo: green
+title: Ray Tracing Simulation
+emoji: 🏃
+colorFrom: yellow
+colorTo: pink
 sdk: gradio
-sdk_version: 5.12.0
+sdk_version: 5.25.2
 app_file: app.py
 pinned: false
-short_description: Convert text/image/audio/video from src language to English
 ---
 ****************************
 <p align="center">
