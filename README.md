@@ -17,12 +17,8 @@ short_description: Convert text/image/audio/video from src language to English
 ****************************
 Replication
  - Requirements
-    - Free API Key from https://detectlanguage.com/ for automatic language detection from text.
-    - GPU for `Whisper` model inference. It's slower in CPU.
- - Notes
-    - `pytesseract` library (For image-to-text) is easier to install in linux machines.
-    - If you have GPU, you can go for more sophisticated image-to-text models.
-    - The image-to-text setup works best for non-decorative and normal sized fonts.
+    - No special requirements
+    - Just clone the repo and it'll work on any machine.
 *******
 
 The space consists of 2 parts: - 
