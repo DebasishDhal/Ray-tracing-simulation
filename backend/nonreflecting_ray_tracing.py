@@ -65,7 +65,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
 
     increment = 2*mt.pi/ray_count
 
-    for angle in np.arange(0, 2 * mt.pi, mt.pi / 180):  # 1° steps
+    for angle in np.arange(0, 2 * mt.pi, increment):  # 1° steps
         dx = mt.cos(angle)
         dy = mt.sin(angle)
         if is_angle_between(angle, lower_angle, upper_angle):
