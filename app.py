@@ -13,7 +13,7 @@ iface1 = gr.Interface(
                     ],
                     outputs="image",
                     live=True,
-                    title="Channel domination", 
+                    title="Non-Reflecting Ray Tracing", 
                     description=description1,
                  )
 
