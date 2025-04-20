@@ -63,7 +63,9 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
     ax.set_aspect('equal', adjustable='box')
     ax.set_xlabel('X-axis')
     ax.set_ylabel('Y-axis')
-    
+    ax.axhline(0, color='black', lw=1)
+    ax.axvline(0, color='black', lw=1)
+
     circle = plt.Circle((a, b), r, color='black', fill=False)
     ax.add_artist(circle)
     ax.plot(a, b, 'ro', markersize=5)
@@ -158,4 +160,4 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
     plt.close(fig)
 
     hit_ratio = 100*total_hits / ray_count
-    return image_array, f"{hit_ratio:.1f}"
+    return image_array, f"{hit_ratio:.5f}"

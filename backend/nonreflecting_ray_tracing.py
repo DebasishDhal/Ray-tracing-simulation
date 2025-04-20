@@ -40,6 +40,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
     
     circle = plt.Circle((a, b), r, color='blue', fill=False)
     ax.add_artist(circle)
+    ax.plot(a, b, 'ro', markersize=5)  # Circle center
 
     def draw_line(angle, length=max(max_dim, 500), x_0=0, y_0=0):
         x_1 = length * mt.cos(angle) + x_0
@@ -85,7 +86,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
         fig.canvas.draw()
         image_array = np.array(fig.canvas.renderer.buffer_rgba())
         plt.close(fig)
-        return image_array
+        return image_array, 100
         # raise ValueError("Circle radius is too large for the given center coordinates.")
     
     lower_angle = theta_center - delta
@@ -139,4 +140,4 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
     image_array = np.array(fig.canvas.renderer.buffer_rgba())
     plt.close(fig)
     hit_ratio = (total_hits / ray_count) * 100
-    return image_array, f"{hit_ratio:.2f}"
+    return image_array, f"{hit_ratio:.5f}"
