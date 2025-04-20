@@ -26,8 +26,6 @@ def is_angle_between(angle, start, end):
 
 
 def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
-    if a == 0 and b == 0:
-        raise ValueError("Circle center cannot be at the origin (0, 0).")
 
     max_dim = max(abs(a), abs(b), r) * 3
     fig, ax = plt.subplots()

@@ -5,7 +5,15 @@ import math as mt
 def reflect_vector(v, n):
     n = n / np.linalg.norm(n)
     return v - 2 * np.dot(v, n) * n
-
+def quad_solver(a, b, c):
+    det = b**2 - 4*a*c
+    if det < 0:
+        raise ValueError("No real roots")
+    elif det == 0:
+        return -b / (2*a), -b / (2*a)
+    else:
+        return (-b - mt.sqrt(det)) / (2*a), (-b + mt.sqrt(det)) / (2*a)
+    
 def plot_reflection_on_circle(ax, angle, center, radius, ray_length=50, color='blue'):
     a, b = center
     origin = np.array([0, 0])
@@ -59,13 +67,49 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
     circle = plt.Circle((a, b), r, color='black', fill=False)
     ax.add_artist(circle)
     
+    def inside_circle_plotter():
+        """Function to plot the rays inside the circle"""
+        increment = 2 * mt.pi / ray_count
+
+        for angle in np.arange(0, 2 * mt.pi, increment):
+            dx = mt.cos(angle)
+            dy = mt.sin(angle)
+
+            A = dx**2 + dy**2
+            B = -2 * (a * dx + b * dy)
+            C = a**2 + b**2 - r**2
+
+            try:
+                t1, t2 = quad_solver(A, B, C)
+
+                valid_ts = [t for t in (t1, t2) if t > 0]
+                if not valid_ts:
+                    continue
+                t_hit = min(valid_ts)
+                
+                x = [0, t_hit * dx]
+                y = [0, t_hit * dy]
+                ax.plot(x, y, color='orange', lw=1)
+            except ValueError:
+                continue
+
     theta_center = mt.atan2(b, a)
     d = mt.hypot(a, b)
     
     try:
         delta = mt.asin(r / d)
     except:
-        raise ValueError("Circle radius is too large for the given center coordinates.")
+        inside_circle_plotter()
+        ax.set_title(f'Rays origin - (0,0). From inside a perfectly reflective circle\nCenter - ({a},{b}), Radius {r}')
+        plt.grid(True)
+        plt.show()
+
+        fig.canvas.draw()
+        image_array = np.array(fig.canvas.renderer.buffer_rgba())
+        plt.close(fig)
+        return image_array
+
+        # raise ValueError("Circle radius is too large for the given center coordinates.")
     
     lower_angle = theta_center - delta
     upper_angle = theta_center + delta
@@ -93,8 +137,8 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
     
     increment = 2*mt.pi/ray_count
     for angle in np.arange(0, 2 * np.pi, increment):
-        dx = mt.cos(angle)
-        dy = mt.sin(angle)
+        # dx = mt.cos(angle)
+        # dy = mt.sin(angle)
         if is_angle_between(angle, lower_angle, upper_angle):
             plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
         
