@@ -78,7 +78,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
         delta = mt.asin(r / d)
     except:
         inside_circle_plotter()
-        ax.set_title(f'Rays origin - (0,0). From inside a perfectly absorbing circle\nCenter - ({a},{b}), Radius {r}')
+        ax.set_title(f'Rays origin - (0,0). From inside a perfectly absorbing circle\nCenter-({a},{b}), Radius-{r}')
         plt.grid(True)
         plt.show()
 
@@ -95,11 +95,12 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
     upper_angle = normalize(upper_angle)    
 
     increment = 2*mt.pi/ray_count
-
+    total_hits = 0
     for angle in np.arange(0, 2 * mt.pi, increment):  # 1° steps
         dx = mt.cos(angle)
         dy = mt.sin(angle)
         if is_angle_between(angle, lower_angle, upper_angle):            
+            total_hits += 1
             A = dx**2 + dy**2
             B = -2 * (a * dx + b * dy)
             C = a**2 + b**2 - r**2
@@ -130,11 +131,12 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"
     ax.plot(x1, y1, color='green', lw=2, linestyle='--')
     ax.plot(x2, y2, color='green', lw=2, linestyle='--')
     
-    ax.set_title(f'Rays with shadow from a perfectly absorbing circle\nCenter - ({a},{b}), Radius {r}')
+    ax.set_title(f'Rays with shadow from a perfectly absorbing circle\nCenter-({a},{b}), Radius-{r}')
     plt.grid(True)
     plt.show()
 
     fig.canvas.draw()
     image_array = np.array(fig.canvas.renderer.buffer_rgba())
     plt.close(fig)
-    return image_array
+    hit_ratio = (total_hits / ray_count) * 100
+    return image_array, f"{hit_ratio:.2f}"

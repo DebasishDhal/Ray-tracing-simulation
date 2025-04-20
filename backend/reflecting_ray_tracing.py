@@ -101,14 +101,14 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
         delta = mt.asin(r / d)
     except:
         inside_circle_plotter()
-        ax.set_title(f'Rays origin - (0,0). From inside a perfectly reflective circle\nCenter - ({a},{b}), Radius {r}')
+        ax.set_title(f'Rays origin - (0,0). From inside a perfectly reflective circle\nCenter-({a},{b}), Radius-{r}')
         plt.grid(True)
         plt.show()
 
         fig.canvas.draw()
         image_array = np.array(fig.canvas.renderer.buffer_rgba())
         plt.close(fig)
-        return image_array
+        return image_array, 100
 
         # raise ValueError("Circle radius is too large for the given center coordinates.")
     
@@ -137,10 +137,12 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
         return [x_0, x_1], [y_0, y_1]
     
     increment = 2*mt.pi/ray_count
+    total_hits = 0
     for angle in np.arange(0, 2 * np.pi, increment):
         # dx = mt.cos(angle)
         # dy = mt.sin(angle)
         if is_angle_between(angle, lower_angle, upper_angle):
+            total_hits += 1
             plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
         
         else:
@@ -148,10 +150,12 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
                 x, y = draw_line(angle)
                 ax.plot(x, y, color='red', lw=1, zorder=5)
     # plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
-    ax.set_title(f'Rays with shadow from a perfectly reflective circle,\nCenter - ({a},{b}), Radius {r}')
+    ax.set_title(f'Rays with shadow from a perfectly reflective circle,\nCenter-({a},{b}), Radius-{r}')
     plt.grid(True)
     plt.show()
     fig.canvas.draw()
     image_array = np.array(fig.canvas.renderer.buffer_rgba())
     plt.close(fig)
-    return image_array
+
+    hit_ratio = 100*total_hits / ray_count
+    return image_array, f"{hit_ratio:.1f}"
