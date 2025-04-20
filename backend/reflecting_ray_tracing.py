@@ -55,7 +55,7 @@ def plot_reflection_on_circle(ax, angle, center, radius, ray_length=50, color='b
 
 
 
-def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
+def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15, clutter = "No"):
     max_dim = max(abs(a), abs(b), r) * 3
     fig, ax = plt.subplots()
     ax.set_xlim(-max_dim, max_dim)
@@ -66,6 +66,7 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
     
     circle = plt.Circle((a, b), r, color='black', fill=False)
     ax.add_artist(circle)
+    ax.plot(a, b, 'ro', markersize=5)
     
     def inside_circle_plotter():
         """Function to plot the rays inside the circle"""
@@ -143,8 +144,9 @@ def reflecting_plotter(a = 20, b = 20, r = 15, ray_count = 15):
             plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
         
         else:
-            x, y = draw_line(angle)
-            ax.plot(x, y, color='red', lw=1, zorder=5)
+            if clutter == "No":
+                x, y = draw_line(angle)
+                ax.plot(x, y, color='red', lw=1, zorder=5)
     # plot_reflection_on_circle(ax, angle, center=(a, b), radius=r)
     ax.set_title(f'Rays with shadow from a perfectly reflective circle,\nCenter - ({a},{b}), Radius {r}')
     plt.grid(True)

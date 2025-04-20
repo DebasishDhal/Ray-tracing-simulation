@@ -25,7 +25,7 @@ def is_angle_between(angle, start, end):
         return angle >= start or angle <= end
 
 
-def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
+def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50, clutter = "No"):
 
     max_dim = max(abs(a), abs(b), r) * 3
     fig, ax = plt.subplots()
@@ -99,8 +99,7 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
     for angle in np.arange(0, 2 * mt.pi, increment):  # 1° steps
         dx = mt.cos(angle)
         dy = mt.sin(angle)
-        if is_angle_between(angle, lower_angle, upper_angle):
-            # continue
+        if is_angle_between(angle, lower_angle, upper_angle):            
             A = dx**2 + dy**2
             B = -2 * (a * dx + b * dy)
             C = a**2 + b**2 - r**2
@@ -120,6 +119,8 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
             except ValueError:
                 continue 
         else:
+            if clutter == "Yes":
+                continue
             x, y = draw_line(angle)
             ax.plot(x, y, color='red', lw=1)
 

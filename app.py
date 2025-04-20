@@ -10,10 +10,11 @@ description1 = (
 iface1 = gr.Interface(
                       fn = nonreflecting_plotter, 
                       inputs=[
-                        gr.Number(label="Circle Center X (a)", value=20),
-                        gr.Number(label="Circle Center Y (b)", value=20),
-                        gr.Number(label="Radius (r)", value=15),
-                        gr.Slider(minimum=3, maximum=1000, step=1, label="Number of Rays", value=50)
+                        gr.Number(label="Circle Center X (a)", value=20, info="X coordinate of Circle center"),
+                        gr.Number(label="Circle Center Y (b)", value=20, info="Y coordinate of Circle center"),
+                        gr.Number(label="Radius (r)", value=15, info="Radius of the circle"),
+                        gr.Slider(minimum=3, maximum=1000, step=1, label="Number of Rays", value=50, info="Number of rays to be plotted in total"),
+                        gr.Radio(label="Remove Clutter", choices=["Yes", "No"], value="No", info="Only keep rays that are INCIDENT by the surface."),
                     ],
                     outputs="image",
                     live=True,
@@ -27,10 +28,11 @@ description2 = ("A source of **light** placed at the **origin**. A spherical **R
 iface2 = gr.Interface(
                       fn = reflecting_plotter, 
                       inputs=[
-                        gr.Number(label="Circle Center X (a)", value=20),
-                        gr.Number(label="Circle Center Y (b)", value=20),
-                        gr.Number(label="Radius (r)", value=15),
-                        gr.Slider(minimum=3, maximum=1000, step=1, label="Number of Rays", value=50)
+                        gr.Number(label="Circle Center X (a)", value=20, info="X coordinate of Circle center"),
+                        gr.Number(label="Circle Center Y (b)", value=20, info="Y coordinate of Circle center"),
+                        gr.Number(label="Radius (r)", value=15, info="Radius of the circle"),
+                        gr.Slider(minimum=3, maximum=1000, step=1, label="Number of Rays", value=50, info="Number of rays to be plotted in total"),
+                        gr.Radio(label="Remove Clutter", choices=["Yes", "No"], value="No", info="Only keep rays that are REFLECTED by the surface."),
                     ],
                     outputs="image",
                     live=True,
