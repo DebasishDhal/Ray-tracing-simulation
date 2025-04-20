@@ -3,7 +3,10 @@ import gradio as gr
 from backend.nonreflecting_ray_tracing import nonreflecting_plotter
 from backend.reflecting_ray_tracing import reflecting_plotter
 
-description1 = "A source of light placed at the origin. A spherical non-Reflecting surface placed in front it. This interface simulates the rays interaction with the non-Reflecting surface."
+description1 = (
+    "A source of **light** placed at the **origin**. A spherical **non-Reflecting** surface placed in front it."
+    "**Change ANY Parameter to get it working.**"
+)
 iface1 = gr.Interface(
                       fn = nonreflecting_plotter, 
                       inputs=[
@@ -18,7 +21,9 @@ iface1 = gr.Interface(
                     description=description1,
                  )
 
-description2 = "A source of light placed at the origin. A spherical Reflecting surface placed in front it. This interface simulates the rays interaction with the Reflecting surface."
+description2 = ("A source of **light** placed at the **origin**. A spherical **Reflecting surface** placed in front it. This interface simulates the rays interaction with the Reflecting surface."
+    "**Change ANY Parameter to get it working.**"
+)
 iface2 = gr.Interface(
                       fn = reflecting_plotter, 
                       inputs=[
