@@ -48,14 +48,47 @@ def nonreflecting_plotter(a = 20, b = 20, r = 15, ray_count = 50):
         y_1 = length * mt.sin(angle) + y_0
         return [x_0, x_1], [y_0, y_1]
 
-    
+    def inside_circle_plotter():
+        """Function to plot the rays inside the circle"""
+        increment = 2 * mt.pi / ray_count
+
+        for angle in np.arange(0, 2 * mt.pi, increment):
+            dx = mt.cos(angle)
+            dy = mt.sin(angle)
+
+            A = dx**2 + dy**2
+            B = -2 * (a * dx + b * dy)
+            C = a**2 + b**2 - r**2
+
+            try:
+                t1, t2 = quad_solver(A, B, C)
+
+                valid_ts = [t for t in (t1, t2) if t > 0]
+                if not valid_ts:
+                    continue
+                t_hit = min(valid_ts)
+                
+                x = [0, t_hit * dx]
+                y = [0, t_hit * dy]
+                ax.plot(x, y, color='orange', lw=1)
+            except ValueError:
+                continue
     theta_center = mt.atan2(b, a)
     d = mt.hypot(a, b)
     
     try:
         delta = mt.asin(r / d)
     except:
-        raise ValueError("Circle radius is too large for the given center coordinates.")
+        inside_circle_plotter()
+        ax.set_title(f'Rays origin - (0,0). From inside a perfectly absorbing circle\nCenter - ({a},{b}), Radius {r}')
+        plt.grid(True)
+        plt.show()
+
+        fig.canvas.draw()
+        image_array = np.array(fig.canvas.renderer.buffer_rgba())
+        plt.close(fig)
+        return image_array
+        # raise ValueError("Circle radius is too large for the given center coordinates.")
     
     lower_angle = theta_center - delta
     upper_angle = theta_center + delta
